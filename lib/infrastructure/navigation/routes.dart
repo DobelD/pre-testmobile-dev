@@ -6,7 +6,8 @@ class Routes {
   static const HISTORY = '/history';
   static const HOME = '/home';
   static const LOGIN = '/login';
+  static const PROGRAM = '/program';
   static const SETTING = '/setting';
   static const SPLASH_SCREEN = '/splash-screen';
-  static const PROGRAM = '/program';
+  static const TRANSACTION = '/transaction';
 }

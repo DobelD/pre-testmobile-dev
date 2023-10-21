@@ -2,6 +2,8 @@ import 'dart:math' as math;
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart' as g;
 
 class PrettyDioLogger extends Interceptor {
   /// Print request [Options]
@@ -108,6 +110,14 @@ class PrettyDioLogger extends Interceptor {
           _printLine('╚');
           logPrint('');
         }
+        g.Get.showSnackbar(g.GetSnackBar(
+          backgroundColor: Colors.red,
+          message: "Error : ${err.message}",
+          duration: 3.seconds,
+          margin: const EdgeInsets.all(12),
+          borderRadius: 8,
+          snackPosition: g.SnackPosition.BOTTOM,
+        ));
       } else {
         _printBoxed(header: 'DioError ║ ${err.type}', text: err.message);
       }

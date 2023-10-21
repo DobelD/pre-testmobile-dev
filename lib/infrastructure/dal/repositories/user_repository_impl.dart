@@ -1,3 +1,4 @@
+import 'package:pretestmobiledev/domain/core/models/user.dart';
 import 'package:pretestmobiledev/domain/core/models/user_model.dart';
 import '../../../domain/core/interfaces/user_repository.dart';
 import '../../../utils/app_preference.dart';
@@ -8,14 +9,10 @@ class UserRepositoryImpl implements UserRepository {
     RemoteProvider.init();
   }
   @override
-  Future<UserModel?> login(String username, String password) async {
+  Future<UserModel?> login(LoginParam login) async {
     try {
-      final Map<String, dynamic> data = {
-        'username': username,
-        'password': password,
-      };
-
-      final response = await RemoteProvider.client.post('login', data: data);
+      final response =
+          await RemoteProvider.client.post('login', data: login.toMap());
 
       if (response.statusCode == 200) {
         final userData = response.data['user'] as Map<String, dynamic>;

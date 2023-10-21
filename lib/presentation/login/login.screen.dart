@@ -56,9 +56,12 @@ class LoginScreen extends GetView<LoginController> {
               child: Obx(() {
                 final loginStatus = controller.loginStatus.value;
                 if (loginStatus == LoginStatus.loading) {
-                  return const ElevatedButton(
-                    onPressed: null,
-                    child: Center(child: CircularProgressIndicator()),
+                  return ElevatedButton(
+                    onPressed: () {},
+                    child: const Center(
+                        child: CircularProgressIndicator(
+                      color: Colors.white,
+                    )),
                   );
                 } else {
                   return ElevatedButton(

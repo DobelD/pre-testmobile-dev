@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pretestmobiledev/domain/core/models/user.dart';
 import 'package:pretestmobiledev/infrastructure/navigation/routes.dart';
 
 import '../../../domain/core/interfaces/user_repository.dart';
@@ -20,8 +21,10 @@ class LoginController extends GetxController {
   Future<void> login() async {
     if (formKey.currentState!.validate()) {
       loginStatus.value = LoginStatus.loading;
-      final user = await _userRepository.login(
-          usernameController.text, passwordController.text);
+      var loginParam = LoginParam(
+          username: usernameController.text.trim(),
+          password: passwordController.text.trim());
+      final user = await _userRepository.login(loginParam);
       if (user != null) {
         loginStatus.value = LoginStatus.success;
         Get.offAllNamed(Routes.HOME);
@@ -31,15 +34,14 @@ class LoginController extends GetxController {
     }
   }
 
-  String validateUsername(String username) {
+  String? validateUsername(String username) {
     if (username.isEmpty) {
       return 'Username is required';
-    } else {
-      return '';
     }
+    return null;
   }
 
-  String validatePassword(String password) {
+  String? validatePassword(String password) {
     if (password.isEmpty) {
       return 'Password is required';
     } else if (password.length < 6) {
@@ -50,7 +52,7 @@ Password must contain at least one uppercase letter,
 one lowercase letter, and one digit
 ''';
     } else {
-      return '';
+      return null;
     }
   }
 

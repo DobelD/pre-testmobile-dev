@@ -56,5 +56,10 @@ class Nav {
       page: () => const ProgramScreen(),
       binding: ProgramControllerBinding(),
     ),
+    GetPage(
+      name: Routes.TRANSACTION,
+      page: () => const TransactionScreen(),
+      binding: TransactionControllerBinding(),
+    ),
   ];
 }
